@@ -1,0 +1,14 @@
+ public static <T extends RealmObject> Number getRealmClassNewObjectId(Realm realm, Class<T> realmClass, String fieldName) {
+        Number currentIdNum = realm.where(realmClass).max(fieldName);
+        return currentIdNum == null ? 1 : currentIdNum.intValue() + 1;
+    }
+    
+        @Nullable
+    public <T extends RealmObject> RealmObject deleteRealmClass(Realm realm, Class<T> realmClass, String itemID) {
+        return realm.where(realmClass).equalTo("itemID", itemID).findFirst();
+    }
+
+    @Nullable
+    public <T extends RealmObject> RealmResults<T> deleteRealmListClass(Realm realm, Class<T> realmClass, String itemID) {
+        return realm.where(realmClass).equalTo("itemID", itemID).findAll();
+    }
